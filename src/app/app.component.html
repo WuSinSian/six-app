@@ -1,0 +1,59 @@
+<!--The whole content below can be removed with the new code.-->
+	<section class="todoapp">
+			<header class="header">
+
+        <app-title></app-title>
+
+        <!--1 <input #newTodes class="new-todo" [placeholder]="inputHint"
+            (keyup.enter)="addTodes(newTodes.value)"   [(ngModel)] ="Todo"
+         autofocus >		-->
+        <!--2-->
+			</header>
+
+
+          <input class="new-todo" [placeholder]="inputHint" autofocus
+             (keyup.enter)="addTodo()" [(ngModel)]="todo">
+
+			<!-- This section should be hidden by default and shown when there are todos -->
+			<section class="main" *ngIf = "todos.length">
+				<input class="toggle-all" type="checkbox" (change)="toggleAll()" [(ngModel)]="isToggleAll">
+				<label for="toggle-all">Mark all as complete</label>
+				<ul class="todo-list">
+
+        <!-->task 08  09</!-->
+
+          <li *ngFor="let item of todos | filter: selectedType" [ngClass]="{'completed': item.done }">
+          <!--<li *ngFor = "let item of todos" [ngClass]="{'completed': item.done }">-->
+          <!--<li *ngFor = "let item of todos" [ngStyle]="{'text-decoration': item.done ? 'line-through':'','color':item.done?'green':'red' }">  -->
+						<div class="view">
+							<input class="toggle" type="checkbox" [(ngModel)]="item.done">
+							<label>{{item.todo | upper }}</label>
+							<button class="destroy" (click)="deleteTodo(item)"></button>
+						</div>
+						<input class="edit" value="Rule the web">
+					</li>
+          <!-->task 08</!-->
+					<!--<li>
+						<div class="view">
+							<input class="toggle" type="checkbox">
+							<label>Buy a unicorn</label>
+							<button class="destroy"></button>
+						</div>
+						<input class="edit" value="Rule the web">
+					</li>-->
+				</ul>
+			</section>
+			<!-- This footer should hidden by default and shown when there are todos -->
+
+		 <app-footer [todos]="todos"  (onClearCompeted)="clearCompleted()" (onSelectTypeChange)="onSelectedType($event)" 	#myfooter ></app-footer>
+		<!--<app-footer ></app-footer>     -->
+		</section>
+
+		<footer class="info">
+			<p>Double-click to edit a todo</p>
+			<!-- Remove the below line ↓ -->
+			<p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
+			<!-- Change this out with your name and url ↓ -->
+			<p>Created by <a href="http://todomvc.com">you</a></p>
+			<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+		</footer>
